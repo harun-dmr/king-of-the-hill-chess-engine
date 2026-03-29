@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.concurrency import run_in_threadpool
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from core.utils import Board
 from core.zuggenerator import gen_all_masks
@@ -29,7 +29,6 @@ app = FastAPI(title="King of the Hill Chess Engine API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -51,7 +50,7 @@ ALGORITHMS = {
 class MoveRequest(BaseModel):
     fen: str
     algorithm: str = "pvs_multi_sort_qs"
-    time_limit: int = 5
+    time_limit: int = Field(default=5, ge=1, le=60)
 
 
 @app.get("/api/health")

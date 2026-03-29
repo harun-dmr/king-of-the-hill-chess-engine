@@ -185,10 +185,10 @@ export default function ChessEngine() {
             Startposition
           </button>
           <button
-            onClick={() => applyPosition(fen)}
+            onClick={() => { setBestMove(null); setMoveArrow([]); setHighlightSquares({}); }}
             className="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 rounded text-sm transition-colors"
           >
-            Brett leeren
+            Markierung löschen
           </button>
         </div>
         <p className="mt-2 text-xs text-yellow-500/80">
