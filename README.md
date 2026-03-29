@@ -30,7 +30,7 @@ To get the best move for a game position given as a FEN string, run:
 python path/to/ki_projekt_gruppe_o/main.py -fen your-fen-string -t 10
 </pre>
 
-Use the value after the `-t` flag to specify the time allocated for finding a move.  
+Use the value after the `-t` flag to specify the time allocated for finding a move.
 Replace `your-fen-string` after the `-fen` flag with the FEN string of your game position.
 
 The output will be a move in the form, for example, `a5b6`.
@@ -61,7 +61,7 @@ The output will be written to the `contest_results.dat` file.
 ki_projekt_gruppe_o
 ├─── core/
 │   ├─── aitech/
-│   │   ├─── alpha_beta/ 
+│   │   ├─── alpha_beta/
 │   │   │   ├─── __init__.py
 │   │   │   ├─── alpha_beta.py
 │   │   │   ├─── alpha_beta_sorted.py
@@ -90,3 +90,49 @@ ki_projekt_gruppe_o
 ├─── main.py
 ├─── README.md
 └─── server-client.py
+```
+
+---
+
+## Web Interface *(personal addition, independent of the group project)*
+
+After the university project concluded, I built a full-stack web interface on top of the engine so the chess engine can be used interactively in the browser.
+
+**Stack:** Next.js (React, TypeScript) · FastAPI · react-chessboard
+
+**Features:**
+- Interactive chessboard — drag & drop pieces or paste a FEN string
+- Select any of the 10 implemented algorithms
+- Adjustable time limit (1–30s)
+- Best move displayed as an arrow directly on the board
+- King of the Hill target squares (d4, d5, e4, e5) highlighted
+
+### Run locally
+
+**Backend** (Python · FastAPI):
+```bash
+pip install fastapi "uvicorn[standard]" numpy
+python3 -m uvicorn backend.main:app --reload --port 8000
+```
+
+**Frontend** (Next.js):
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Added structure
+```text
+├─── backend/
+│   ├─── main.py          # FastAPI server, exposes /api/best-move
+│   └─── requirements.txt
+└─── frontend/
+    └─── app/
+        ├─── components/
+        │   └─── ChessEngine.tsx   # interactive chessboard + controls
+        ├─── layout.tsx
+        └─── page.tsx
+```
