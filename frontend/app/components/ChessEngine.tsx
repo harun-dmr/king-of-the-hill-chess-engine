@@ -77,7 +77,7 @@ export default function ChessEngine() {
   const [bestMove, setBestMove] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [moveArrow, setMoveArrow] = useState<[string, string, string][]>([]);
+  const [moveArrow, setMoveArrow] = useState<[Square, Square, string][]>([]);
   const [highlightSquares, setHighlightSquares] = useState<Record<string, React.CSSProperties>>({});
 
   const applyPosition = useCallback((newFen: string) => {
@@ -144,7 +144,7 @@ export default function ChessEngine() {
         if (move.length >= 4) {
           const from = move.slice(0, 2);
           const to = move.slice(2, 4);
-          setMoveArrow([[from, to, "#22c55e"]]);
+          setMoveArrow([[from as Square, to as Square, "#22c55e"]]);
           setHighlightSquares({
             [from]: { backgroundColor: "rgba(34, 197, 94, 0.3)" },
             [to]: { backgroundColor: "rgba(34, 197, 94, 0.5)" },
